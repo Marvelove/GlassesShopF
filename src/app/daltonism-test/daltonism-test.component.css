@@ -1,0 +1,15 @@
+.daltonism-test {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.daltonism-test__image {
+  margin-bottom: 30px;
+}
+
+.daltonism-test__button {
+  padding: 20px;
+  cursor: pointer;
+}

@@ -1,0 +1,10 @@
+<h1> Product List: </h1>
+<section class="product-list">
+  <div class="product-list__item" *ngFor="let product of products">		<!-- ngFor is displaying an array, but ngFor can repeat items for any iterable object -->
+    <img class="product-list__img" src={{product?.url}} alt="">
+    <p class="product-item__name"> <strong>Name:</strong> {{ product?.itemName }} </p>
+    <p class="product-item__price"> <strong>Price:</strong> {{ product?.price }} PLN </p>
+    <br>
+    <button class="product-item__button" type="button" name="button" [routerLink]="['/product', product?.itemId]"> Show More</button>
+  </div>
+</section>

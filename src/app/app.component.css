@@ -1,0 +1,34 @@
+.header {
+  display: flex;
+  align-items: baseline;
+  background-color: #2B303A;
+  padding: 5px 10px;
+}
+
+.header__name {
+  flex: 1;
+  color: #ffeead;
+  text-transform: uppercase;
+}
+
+a {
+  margin-right: 10px;
+  color: #ffffff;
+  font-weight: bold;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.header__logo {
+  color: #ffffff;
+  background: #ffffff;
+}
+
+.active {
+  color: #ffffff;
+  background: #ff6f69;
+  padding: 5px;
+  border-radius: 5px;
+  text-decoration: none;
+  text-transform: uppercase;
+}

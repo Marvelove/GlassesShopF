@@ -1,0 +1,25 @@
+.product-detail {
+  padding-top: 20px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.product-detail__info {
+  background: #dddddd;
+  padding: 20px;
+  color: #000000;
+}
+
+.product-detail__img {
+  margin-left: 20px
+}
+
+.product-detail__name, .product-detail__price, .product-detail__correction, .product-detail__available {
+  flex-direction: column;
+}
+
+.product-detail__info__back {
+  padding: 5px;
+  cursor: pointer;
+  width: 100%;
+}

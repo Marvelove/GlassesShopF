@@ -1,0 +1,14 @@
+<header>
+  <h1> Welcome on {{selectedProduct?.itemName}} details page! </h1>
+
+  <section class=product-detail>
+    <img src={{selectedProduct?.url}} alt="" class="product-detail__img">
+    <section class=product-detail__info>
+      <p class="product-detail__info__name"><strong>Name:</strong> {{ selectedProduct?.itemName }}</p>
+      <p class="product-detail__info__price"><strong>Price:</strong> {{ selectedProduct?.price }} PLN </p>
+      <p class="product-detail__info__correction"><strong>Correction:</strong> {{ selectedProduct?.correction }} </p>
+      <p class="product-detail__info__available"><strong>Available:</strong> {{ selectedProduct?.available }} </p>
+      <button class="product-detail__info__back" type="button" name="button" (click)="back()">Back</button>
+    </section>
+  </section>
+</header>
