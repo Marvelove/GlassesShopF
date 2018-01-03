@@ -10,6 +10,8 @@ import { EyeTestComponent } from './eye-test/eye-test.component';
 import { DaltonismTestComponent } from './daltonism-test/daltonism-test.component';
 import { ProductItemComponent } from './product-item/product-item.component';
 
+import { FormsModule } from '@angular/forms';
+
 // dodane
 import { ProductItemService } from './product-item/product-item.service';
 import { Http } from '@angular/http';
@@ -36,7 +38,8 @@ const appRoutes: Routes = [
       appRoutes,
       { enableTracing: false } // <-- debugging purposes only
     ),
-    HttpModule
+    HttpModule,
+    FormsModule
   ],
   providers: [
     HttpClientModule,

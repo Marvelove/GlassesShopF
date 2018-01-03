@@ -1,3 +1,9 @@
+<input 
+type="file" name="fileupload" 
+id="fileupload" (change)="fileSelected($event)"
+[(ngModel)]="selectedFile"
+>
+
 <h1> Product List: </h1>
 <section class="product-list">
   <div class="product-list__item" *ngFor="let product of products">		<!-- ngFor is displaying an array, but ngFor can repeat items for any iterable object -->
