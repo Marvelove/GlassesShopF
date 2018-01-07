@@ -15,13 +15,15 @@ import { FormsModule } from '@angular/forms';
 // dodane
 import { ProductItemService } from './product-item/product-item.service';
 import { Http } from '@angular/http';
+import { LoginComponent } from './login/login.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/product', pathMatch: 'full' },
   { path: 'product', component: ShopListComponent },
   { path: 'product/:id', component: ProductItemComponent },
   { path: 'daltonism-test', component: DaltonismTestComponent },
-  { path: 'eye-test', component: EyeTestComponent }
+  { path: 'eye-test', component: EyeTestComponent },
+  { path: 'login', component: LoginComponent}
 ];
 
 @NgModule({
@@ -30,7 +32,8 @@ const appRoutes: Routes = [
     ShopListComponent,
     EyeTestComponent,
     DaltonismTestComponent,
-    ProductItemComponent
+    ProductItemComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

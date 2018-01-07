@@ -1,15 +1,28 @@
 import { Component, OnInit } from '@angular/core';
 
+import { EyeTestService } from './eye-test.service';
+import { Image } from './image';
+
+import { HttpClientModule } from '@angular/common/http'; 
+import { Http, HttpModule } from '@angular/http';
+
 @Component({
   selector: 'app-eye-test',						// selektor css, który identyfikuje ten komponent w szablonie
   templateUrl: './eye-test.component.html',		// adres URL do zewnętrznego pliku zawierającego szablon widoku
-  styleUrls: ['./eye-test.component.css']		// lista adresów URL do arkuszy stylów, które mają być zastosowane do widoku
+  styleUrls: ['./eye-test.component.css'],	// lista adresów URL do arkuszy stylów, które mają być zastosowane do widoku
+  providers: [EyeTestService]
 })
 export class EyeTestComponent implements OnInit {
 
-  constructor() { }
+  constructor(    
+    private eyeTestService : EyeTestService
+   // private http: Http
+  ) { }
 
-  public letters = [{
+  letters : Image[]; 
+  picked_letter: Image;
+  /*
+  public letters_mocked = [{
     id: 1,
     image: 'assets/images/k.jpg',
     value: "K"
@@ -42,16 +55,47 @@ export class EyeTestComponent implements OnInit {
     image: 'assets/images/z.jpg',
     value: "Z"
   }];
+  */
 
-  public pickedLetter;
+  //public pickedLetter_mocked;
 
-  public getRandomLetter = () => {		// also after click the button 
-    let id = Math.floor(Math.random() * this.letters.length);
-    this.pickedLetter = this.letters[id];;
+  /*
+  public getRandomLetter_mocked = () => {		// also after click the button 
+    let id = Math.floor(Math.random() * this.letters_mocked.length);
+    this.pickedLetter_mocked = this.letters_mocked[id];;
   }
-
+  */
   ngOnInit() {
-    this.getRandomLetter();
+    this.getImages();
+    this.printImages();
+    //this.getRandomLetter_mocked();      
+    //this.demo();
   }
 
+  getImages() : void {
+    this.eyeTestService.getImages().then(product => this.letters = product); 
+  } 
+
+  sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  async printImages() {
+    for ( var i = 0; i < this.letters.length; i++) {
+      this.picked_letter = this.letters[i];
+      await this.sleep(6000);
+      console.log('6 second later');
+    }
+  }
+  /*
+  async demo() {
+
+    for ( var i = 0; i < 5; i++) {
+      this.getRandomLetter_mocked();
+      await this.sleep(6000);
+      console.log('6 second later');
+    }
+  
+  }
+  */
 }

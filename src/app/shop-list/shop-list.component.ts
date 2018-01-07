@@ -43,7 +43,6 @@ export class ShopListComponent implements OnInit {
         // this.avatarLink = res.link
         // by później robiac update user profile, wyslac odpowiedni url
       })
-      
 
     }
 
