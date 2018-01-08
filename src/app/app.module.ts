@@ -16,6 +16,7 @@ import { FormsModule } from '@angular/forms';
 import { ProductItemService } from './product-item/product-item.service';
 import { Http } from '@angular/http';
 import { LoginComponent } from './login/login.component';
+import { RecordRtcComponent } from './record-rtc/record-rtc.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/product', pathMatch: 'full' },
@@ -33,7 +34,8 @@ const appRoutes: Routes = [
     EyeTestComponent,
     DaltonismTestComponent,
     ProductItemComponent,
-    LoginComponent
+    LoginComponent,
+    RecordRtcComponent
   ],
   imports: [
     BrowserModule,

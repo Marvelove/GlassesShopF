@@ -15,12 +15,13 @@ import { Http, HttpModule } from '@angular/http';
 export class EyeTestComponent implements OnInit {
 
   constructor(    
-    private eyeTestService : EyeTestService
-   // private http: Http
+    private eyeTestService : EyeTestService,
+    private http: Http
   ) { }
 
   letters : Image[]; 
   picked_letter: Image;
+  selectedFile : any;
   /*
   public letters_mocked = [{
     id: 1,
@@ -98,4 +99,27 @@ export class EyeTestComponent implements OnInit {
   
   }
   */
+
+
+  
+  fileSelected(event) {
+    if (event.target && event.target.files[0]) {
+      let file = event.target.files[0];
+      
+      const formData = new FormData();
+      formData.append("image", file);
+      // ten kod do servisu
+      // this.userService.upload(selectedFile);
+      // url powinien byc w stylu /userprofile/1
+      // gdzie 1 to id usera
+      this.http.post('www.google.com', formData).subscribe(res => {
+        // w odpowiedzi powinno sie zwrocic link do avatara
+        // this.avatarLink = res.link
+        // by później robiac update user profile, wyslac odpowiedni url
+      })
+
+    }
+
+  }
+
 }

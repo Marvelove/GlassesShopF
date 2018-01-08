@@ -1,8 +1,15 @@
+<input 
+type="file" name="fileupload" 
+id="fileupload" (change)="fileSelected($event)"
+[(ngModel)]="selectedFile"
+>
+
 <header>
   <h1> Welcome on Eye Test </h1>
 
   <section class=eye-test>
-    <img src="{{picked_letter}}" alt="" class="eye-test__image">
-    <!-- <button type="button" (click)="getRandomLetter_mocked()" name="button" class="eye-test__button"> Next letter </button> -->
+    <img src="{{picked_letter.url}}" alt="" class="eye-test__image">
+    <button type="button" name="button" class="eye-test__button"> Next letter </button>
+
   </section>
 </header>
