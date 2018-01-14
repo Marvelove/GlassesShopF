@@ -18,13 +18,15 @@ import { Http } from '@angular/http';
 import { LoginComponent } from './login/login.component';
 import { RecordRtcComponent } from './record-rtc/record-rtc.component';
 
+
 const appRoutes: Routes = [
   { path: '', redirectTo: '/product', pathMatch: 'full' },
   { path: 'product', component: ShopListComponent },
   { path: 'product/:id', component: ProductItemComponent },
   { path: 'daltonism-test', component: DaltonismTestComponent },
   { path: 'eye-test', component: EyeTestComponent },
-  { path: 'login', component: LoginComponent}
+  { path: 'login', component: LoginComponent},
+  { path: 'record-rtc', component: RecordRtcComponent},
 ];
 
 @NgModule({

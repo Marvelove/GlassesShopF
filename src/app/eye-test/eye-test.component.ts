@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 
 import { EyeTestService } from './eye-test.service';
 import { Image } from './image';
 
 import { HttpClientModule } from '@angular/common/http'; 
 import { Http, HttpModule } from '@angular/http';
+
+import * as RecordRTC from 'recordrtc';
 
 @Component({
   selector: 'app-eye-test',						// selektor css, który identyfikuje ten komponent w szablonie
@@ -19,10 +21,10 @@ export class EyeTestComponent implements OnInit {
     private http: Http
   ) { }
 
-  letters : Image[]; 
-  picked_letter: Image;
+  //letters : Image[]; 
+  //picked_letter: Image;
   selectedFile : any;
-  /*
+    
   public letters_mocked = [{
     id: 1,
     image: 'assets/images/k.jpg',
@@ -56,31 +58,33 @@ export class EyeTestComponent implements OnInit {
     image: 'assets/images/z.jpg',
     value: "Z"
   }];
-  */
+  
 
-  //public pickedLetter_mocked;
+  public pickedLetter_mocked;
 
-  /*
+  
   public getRandomLetter_mocked = () => {		// also after click the button 
     let id = Math.floor(Math.random() * this.letters_mocked.length);
     this.pickedLetter_mocked = this.letters_mocked[id];;
   }
-  */
+  
   ngOnInit() {
-    this.getImages();
-    this.printImages();
+    //this.getImages();
+    //this.printImages();
     //this.getRandomLetter_mocked();      
-    //this.demo();
+    this.demo();
   }
 
+  /*
   getImages() : void {
     this.eyeTestService.getImages().then(product => this.letters = product); 
   } 
+  */
 
   sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
-
+  /*
   async printImages() {
     for ( var i = 0; i < this.letters.length; i++) {
       this.picked_letter = this.letters[i];
@@ -88,7 +92,8 @@ export class EyeTestComponent implements OnInit {
       console.log('6 second later');
     }
   }
-  /*
+  */
+  
   async demo() {
 
     for ( var i = 0; i < 5; i++) {
@@ -98,7 +103,7 @@ export class EyeTestComponent implements OnInit {
     }
   
   }
-  */
+  
 
 
   
@@ -121,5 +126,14 @@ export class EyeTestComponent implements OnInit {
     }
 
   }
+
+  //successCallback : any;
+  //errorCallback : any;
+
+
+
+
+
+
 
 }

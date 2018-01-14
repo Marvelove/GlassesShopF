@@ -22,7 +22,7 @@ export class DaltonismTestComponent implements OnInit {
   images : Image[];
   picked_image : Image;
 
-  /*
+  
   public images_mocked = [{
     id: 1,
     image: 'assets/images/d1.jpg'
@@ -33,32 +33,32 @@ export class DaltonismTestComponent implements OnInit {
     id: 3,
     image: 'assets/images/d3.jpg'
   }];
-  */
+  
 
-  //public pickedImage_mocked;
+  public pickedImage_mocked;
 
-  /*
+  
   public getRandomImage_mocked = () => {		// also after click the button
     let id = Math.floor(Math.random() * this.images_mocked.length);
     this.pickedImage_mocked = this.images_mocked[id];
   }
-  */
+  
   
   ngOnInit() {
-    this.getImages();
-    this.printImages();
-    //this.demo();
+    //this.getImages();
+    //this.printImages();
+    this.demo();
     //this.getRandomImage_mocked();
   }
-
+  /*
   getImages() : void {
     this.daltonismTestService.getImages().then(downloaded_image => this.images = downloaded_image)
   }
-
+  */
   sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
-
+  /*
   async printImages() {
     for ( var i = 0; i < this.images.length; i++) {
       this.picked_image = this.images[i];
@@ -66,8 +66,8 @@ export class DaltonismTestComponent implements OnInit {
       console.log('6 second later');
     }
   }
-
-  /*
+  */
+  
   async demo() {
     for ( var i = 0; i < this.images_mocked.length; i++) {
       this.pickedImage_mocked = this.images_mocked[i];
@@ -75,5 +75,5 @@ export class DaltonismTestComponent implements OnInit {
       console.log('6 second later');
     }
   }
-  */
+  
 }
