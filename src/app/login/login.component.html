@@ -1,7 +1,11 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ng2-bootstrap/x.x.x/ng2-bootstrap.min.js"></script>
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
 
+
+
 <div class="container">
+
+  
 	<div class="row">
         <div class="span12">
     		<div class="" id="loginModal">
@@ -12,19 +16,17 @@
               <div class="modal-body">
                 <div class="well">
                   <ul class="nav nav-tabs">
-                    <li class="active"><a href="#login" data-toggle="tab">Login</a></li>
-                    <li><a href="#create" data-toggle="tab">Create Account</a></li>
+                    <li class="active"><a href="/login" data-toggle="tab" (onclick)="login()">Login</a></li>
+                    <li ><a href="/register" data-toggle="tab" (onclick)="register()">Create Account</a></li>
                   </ul>
-                  <div id="myTabContent" class="tab-content">
-                    <div class="tab-pane active in" id="login">
+                  <div id="myTabContent" class="tab-content" >
+                    <div class="tab-pane active in" id="login" *ngIf="isLogin">
                       <form class="form-horizontal" action='' method="POST">
                         <fieldset>
-                          <div id="legend">
-                            <legend class="">Login</legend>
-                          </div>    
+                          <hr>
                           <div class="control-group">
                             <!-- Username -->
-                            <label class="control-label"  for="username">Username</label>
+                            <label class="control-label"  for="username" >Username</label>
                             <div class="controls">
                               <input type="text" id="username" name="username" placeholder="" class="input-xlarge">
                             </div>
@@ -41,6 +43,7 @@
      
                           <div class="control-group">
                             <!-- Button -->
+                            <hr>
                             <div class="controls">
                               <button class="btn btn-success">Login</button>
                             </div>
@@ -48,7 +51,7 @@
                         </fieldset>
                       </form>                
                     </div>
-                    <div class="tab-pane fade" id="create">
+                    <div class="tab-pane fade" id="create" *ngIf="isRegister" >    <!-- rejestracja -->
                       <form id="tab">
                         <label>Username</label>
                         <input type="text" value="" class="input-xlarge">

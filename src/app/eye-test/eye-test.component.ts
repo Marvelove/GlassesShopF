@@ -7,6 +7,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { Http, HttpModule } from '@angular/http';
 
 import * as RecordRTC from 'recordrtc';
+import { ProductItem } from '../product-item/product-item';
+
+import { Headers, RequestOptions } from '@angular/http';
 
 @Component({
   selector: 'app-eye-test',						// selektor css, który identyfikuje ten komponent w szablonie
@@ -63,48 +66,41 @@ export class EyeTestComponent implements OnInit {
   public pickedLetter_mocked;
 
   
-  public getRandomLetter_mocked = () => {		// also after click the button 
+  public getRandomLetter_mocked = () => {	
     let id = Math.floor(Math.random() * this.letters_mocked.length);
     this.pickedLetter_mocked = this.letters_mocked[id];;
   }
   
-  ngOnInit() {
-    //this.getImages();
-    //this.printImages();
-    //this.getRandomLetter_mocked();      
+  async ngOnInit() {  
     this.demo();
+    await this.sleep(6000);
+    this.startRecording();
   }
-
-  /*
-  getImages() : void {
-    this.eyeTestService.getImages().then(product => this.letters = product); 
-  } 
-  */
 
   sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
-  /*
-  async printImages() {
-    for ( var i = 0; i < this.letters.length; i++) {
-      this.picked_letter = this.letters[i];
-      await this.sleep(6000);
-      console.log('6 second later');
-    }
-  }
-  */
-  
-  async demo() {
 
+  async demo() {
+    await this.sleep(6000);
     for ( var i = 0; i < 5; i++) {
       this.getRandomLetter_mocked();
-      await this.sleep(6000);
-      console.log('6 second later');
+      await this.sleep(3000);
+      console.log('next');
     }
   
   }
   
-
+ test  =
+  {
+    "id": 0,
+    "email": "testtest@asdf.pl",
+    "password": "string",
+    "matchingPassword": "string",
+    "firstName": "string",
+    "lastName": "string",
+    "userName": "teeest"
+  }
 
   
   fileSelected(event) {
@@ -117,23 +113,96 @@ export class EyeTestComponent implements OnInit {
       // this.userService.upload(selectedFile);
       // url powinien byc w stylu /userprofile/1
       // gdzie 1 to id usera
-      this.http.post('www.google.com', formData).subscribe(res => {
-        // w odpowiedzi powinno sie zwrocic link do avatara
+      //this.http.post('http://localhost:8080/test', formData).subscribe(res => {
+        //this.http.post('http://localhost:8080/admin/item', this.glasses).subscribe(res => {
+      // w odpowiedzi powinno sie zwrocic link do avatara
         // this.avatarLink = res.link
         // by później robiac update user profile, wyslac odpowiedni url
-      })
+      //})
 
+      console.log("wysylam nowego uzytkownika");
+      let headers = new Headers({ 'Content-Type': 'application/json' });
+      let options = new RequestOptions({ headers: headers });
+      return this.http.post("http://localhost:8080/registration", this.test, options).toPromise()
+             .then(this.extractData)
+             .catch(this.handleErrorPromise);
     }
 
   }
 
-  //successCallback : any;
-  //errorCallback : any;
+  extractData : any;
+  handleErrorPromise : any;
 
+  stream : MediaStream;
+  recordRTC : any;
+  @ViewChild('audio') video: any
 
+  ngAfterViewInit() {
+    // set the initial state of the video
+    let video:HTMLAudioElement = this.video.nativeElement;
+    video.muted = false;
+    video.controls = true;
+    video.autoplay = false;
+  }
 
+  async startRecording() {
+    await this.sleep(5000);
+    let mediaConstraints = {
+       audio: true
+    };
+    navigator.mediaDevices
+    .getUserMedia({ audio: true})
+      .then(this.successCallback.bind(this));
+      this.stopRecording();
+  }
 
+  async stopRecording() {
 
+    await this.sleep(15000);
+    console.log('stop!');
 
+    let recordRTC = this.recordRTC;
+    recordRTC.stopRecording(this.processVideo.bind(this));
+    let stream = this.stream;
+    stream.getAudioTracks().forEach(track => track.stop());
+    this.download2();  
+  }
 
+  async download2() {
+    await this.sleep(5000);
+    console.log('download2');
+    this.recordRTC.save('video.wav');
+  }
+
+  successCallback(stream: MediaStream) {
+    var options = {
+          mimeType: 'video/webm', // or video/webm\;codecs=h264 or video/webm\;codecs=vp9
+          audioBitsPerSecond: 128000,
+          //videoBitsPerSecond: 128000,
+          bitsPerSecond: 128000 // if this line is provided, skip above two
+        };
+        this.stream = stream;
+        this.recordRTC = RecordRTC(stream, options);
+        this.recordRTC.startRecording();
+        let video: HTMLAudioElement = this.video.nativeElement;
+        video.src = window.URL.createObjectURL(stream);
+        this.toggleControls();
+        
+  }
+  
+  toggleControls() {
+    let video: HTMLAudioElement = this.video.nativeElement;
+    video.muted = !video.muted;
+    video.controls = !video.controls;
+    video.autoplay = !video.autoplay;
+  }
+
+  processVideo(audioWebMURL) {
+    let video: HTMLAudioElement = this.video.nativeElement;
+    let recordRTC = this.recordRTC;
+    video.src = audioWebMURL;
+    this.toggleControls();
+    var recordedBlob = recordRTC.getBlob();
+    recordRTC.getDataURL(function (dataURL) { });
+  }
 }

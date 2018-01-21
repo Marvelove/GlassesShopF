@@ -17,6 +17,7 @@ import { ProductItemService } from './product-item/product-item.service';
 import { Http } from '@angular/http';
 import { LoginComponent } from './login/login.component';
 import { RecordRtcComponent } from './record-rtc/record-rtc.component';
+import { RegisterComponent } from './register/register.component';
 
 
 const appRoutes: Routes = [
@@ -27,6 +28,7 @@ const appRoutes: Routes = [
   { path: 'eye-test', component: EyeTestComponent },
   { path: 'login', component: LoginComponent},
   { path: 'record-rtc', component: RecordRtcComponent},
+  { path: 'register', component: RegisterComponent}
 ];
 
 @NgModule({
@@ -37,7 +39,8 @@ const appRoutes: Routes = [
     DaltonismTestComponent,
     ProductItemComponent,
     LoginComponent,
-    RecordRtcComponent
+    RecordRtcComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

@@ -4,6 +4,13 @@ id="fileupload" (change)="fileSelected($event)"
 [(ngModel)]="selectedFile"
 >
 
+<div class="row">
+  <div class="col-xs-12">
+      <audio #audio class="audio"></audio>
+    <!-- <video #video class="video"></video> -->
+  </div>
+</div>
+
 <header>
   <h1> Welcome on Eye Test </h1>
 

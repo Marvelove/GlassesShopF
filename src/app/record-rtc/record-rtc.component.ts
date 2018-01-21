@@ -23,30 +23,21 @@ export class RecordRtcComponent implements OnInit {
 
   ngAfterViewInit() {
     // set the initial state of the video
-    //let video:HTMLVideoElement = this.video.nativeElement;
     let video:HTMLAudioElement = this.video.nativeElement;
     video.muted = false;
     video.controls = true;
     video.autoplay = false;
   }
 
-  // { audio: true, video: { width: 1280, height: 720 } 
   startRecording() {
+
     let mediaConstraints = {
-      //video: true
-      /*{
-        mandatory: {
-          minWidth: 1280,
-          minHeight: 720
-        } 
-      }*///,
        audio: true
     };
     navigator.mediaDevices
-    .getUserMedia({ audio: true})
-      //.getUserMedia({ audio: true, video: { width: 1280, height: 720 }})
-      //.getUserMedia(mediaConstraints)
+      .getUserMedia({ audio: true})
       .then(this.successCallback.bind(this));
+      this.stopRecording();
   }
 
   successCallback(stream: MediaStream) {
@@ -62,6 +53,7 @@ export class RecordRtcComponent implements OnInit {
         let video: HTMLAudioElement = this.video.nativeElement;
         video.src = window.URL.createObjectURL(stream);
         this.toggleControls();
+        
   }
   
   toggleControls() {
@@ -71,13 +63,17 @@ export class RecordRtcComponent implements OnInit {
     video.autoplay = !video.autoplay;
   }
 
-  stopRecording() {
+  async stopRecording() {
+
+    await this.sleep(15000);
+    console.log('stop!');
+
     let recordRTC = this.recordRTC;
     recordRTC.stopRecording(this.processVideo.bind(this));
-    //recordRTC.stopRecording(this.processVideo.bind(this));
     let stream = this.stream;
     stream.getAudioTracks().forEach(track => track.stop());
-    //stream.getVideoTracks().forEach(track => track.stop());
+    
+    this.download2();
   }
 
   processVideo(audioWebMURL) {
@@ -92,4 +88,15 @@ export class RecordRtcComponent implements OnInit {
   download() {
     this.recordRTC.save('video.wav');
   }
+
+  sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+  
+  async download2() {
+    await this.sleep(6000);
+    console.log('download2');
+    this.recordRTC.save('video.wav');
+  }
+
 }
